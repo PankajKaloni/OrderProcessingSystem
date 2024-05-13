@@ -1,0 +1,37 @@
+﻿@model List<OrderProcessingSystem.Models.Product>
+
+
+@using (Html.BeginForm("SelectionOfProducts", "Home", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+        </tr>
+        @if (Model != null)
+        {
+            for (var i = 0; i < Model.Count; i++)
+            {
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x => Model[i].Product_ID)</td>
+                        @Html.HiddenFor(x => Model[i].Product_ID)
+                        <td>@Html.DisplayFor(x => Model[i].Product_Name)</td>
+                        <td>@Html.DisplayFor(x => Model[i].Product_Price)</td>
+                        @Html.HiddenFor(x => Model[i].Product_Price)
+                        <td>@Html.TextBoxFor(x => Model[i].Quantity)</td>
+
+                        @if (ViewBag.CustomerId != null)
+                        {
+                            TempData["CustomerId"] = ViewBag.CustomerId;
+                        }
+                    </tr>
+                }
+            }
+         }
+    </table>
+    
+    <button type="submit">Place Order</button>
+}
